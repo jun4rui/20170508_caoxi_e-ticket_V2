@@ -1,0 +1,81 @@
+http://localhost:8080/znhz/front/huodong_sendSmsConfirm.action?phone=15874991816
+
+短信方法：ajax
+	      发送确认码 http://localhost:8080/znhz/front/huodong_sendSmsConfirm.action  参数有 number 手机号码 
+	      返回 ： status ： true 发送成功
+	      
+				确认确认码 http://localhost:8080/znhz/front/huodong_getSmsConfirm.action   参数  vaildcode 确认码  phone 手机
+				返回 ： status   大于 0 成功
+	================支付宝 ==================			
+提交订单 ps:提供活动页面url ：form
+				http://localhost:8080/znhz/front/huodong_addHuoDongOrder.action 
+				参数： miaoshaprp_id 活动id 固定
+							 phone   手机号码
+							 remark  预购车型
+							 quantity　数量
+							 channel  渠道
+				成功返回： 自动跳转到支付宝wap 网关支付 - 完成支付后 - 跳转到 /carshow2016/ticket-show.html?phone=15874991816
+				
+				失败返回： 活动页面 ，alert 错误信息。
+
+	===================END 支付宝====================
+
+	=================微信支付======================
+提交订单 ps:提供活动页面url ：form
+				http://localhost:8080/znhz/front/huodong_addHuoDongOrderWeixin.action 
+				参数： miaoshaprp_id 活动id 固定
+				       guest_id 用户id
+				       name    姓名
+				       phone   手机号码
+				       remark  预购车型
+				       quantity　数量
+				       channel  渠道
+				成功返回： 自动跳转到支付宝wap 网关支付 - 完成支付后 - 跳转到 /carshow2016/ticket-show.html?phone=15874991816
+				
+				失败返回： 活动页面 ，alert 错误信息。
+
+	===================END 微信支付 ============
+
+	==================获取微信用户信息=========================
+		3、用户注册调整流程  http://www.xiaolvyou.com.cn/
+		1  微信一点登陆   用户点击预定   -->  页面判断是否存在userid  -- >  不存在 访问 -- > 
+		访问 http://www.xiaolvyou.com.cn/weixin/thirdWebPageLogin.action?page_url=mainpage.html_lineid=730  
+			http://www.xiaolvyou.com.cn/weixin/thirdWebPageLogin.action?page_url=selectdate.html!3Flineid!3D0 感叹号 换成 % 号  再进行 decodeurl 转码
+					page_url 是判断后续流程的参数字段。mainpage.html 是返回页面  lineid = 730 是对应参数 已下划线分割
+				1.如果用户是已存在用户 回跳转到对应页面 带参数  比如 跳转到 域名/指定目录/mainpage.html?lineid=730
+				
+				2.如果用户是不存在用户  保存用户信息。 跳转到 域名/指定目录/mainpage.html?lineid=730
+		==================获取微信用户信息=========================
+
+
+
+查询订单：ajax
+					http://localhost:8080/znhz/front/huodong_queryOrderDetail.action 
+						参数：phone   手机号码 或者 userid 用户id
+						成功返回：orderVO 订单列表对象   address 2维码地址 miaoshaname产品名称 mark 预购车型 fraction 价格 dispatchtype 数量  phone 手机号码   paystatedes 支付状态  miaoshatime创建时间   checktdate 更新时间 
+	维码地址			/znhz/carshow2016/ticket-check.html?trade_no=D15874991816	
+										
+管理员扫码2维码url 
+					/znhz/carshow2016/ticket-check.html?trade_no=D15874991816	
+				        http://localhost:8080/znhz/front/huodong_getOrderDetail.action  
+					参数：trade_no  订单号 订单id 即（sys_show_order_id）
+					
+验证购买
+	http://localhost:8080/znhz/front/huodong_isvaildHuoDongOrder.action  
+参数：phone 手机号 或者 userid 用户id
+成功返回： status 1 成功 0失败			
+					
+
+管理员更新订单状态	 ajax
+		http://localhost:8080/znhz/front/huodong_updateOrderPayState.action 
+		参数：trade_no_arr   订单id  已, 分割 是D开头的id  或者  trade_no 订单id 即（sys_show_order_id）
+	  返回：status     成功更新的个数
+	  
+	  
+	  
+	addChouJiangOrder　抽奖轮盘 ajax
+	参数：phone　手机号码　
+	返回　：　status　102 已抽奖 103 未购买  1成功
+						miaoshaname  产品名称
+						rotate    产品id
+	跳转到 用户2维码展示页面

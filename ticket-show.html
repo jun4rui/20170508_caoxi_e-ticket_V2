@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>草莓音乐节:查询电子票</title>
+	<meta name="viewport" content="width=640, user-scalable=no">
+	<script src="jquery-3.1.1.min.js"></script>
+	<script>
+		//查询url参数函数
+		//有则返回参数列表list
+		//没有则返回空串
+		function getParameters(inUrl/*完整的URL字符串*/) {
+			//url中有?号才继续
+			if (inUrl.indexOf('\?') >= 0) {
+				return inUrl.substring(inUrl.indexOf('?') + 1).split('&');    //有则返回所有参数的list
+			} else {
+				return '';  //没有则返回''
+			}
+		}
+
+		//获得url中某个参数的值
+		//有则返回参数的值
+		//没有则返回空串
+		function getParameterValue(inUrl/*输入Url*/, inName/*参数名*/) {
+			var paraList = getParameters(inUrl);
+			for (var i = 0; i < paraList.length; i++) {
+				//如果没有'='则跳过
+				if (paraList[i].indexOf('=') < 0) {
+					continue;
+				}
+				//如果参数名=inName则返回参数值
+				var tempVal = paraList[i].split('=');
+				if (tempVal[0] == inName) {
+					return tempVal[1];
+				}
+			}
+			return '';
+		}
+        var guestid = getParameterValue(location.href, 'guest_id');
+        if (guestid==''){
+            alert('信息异常，请关闭购买页面后重新尝试');
+            location.href = 'index.html';
+        }
+	</script>
+	<style>
+		body {
+			padding: 0;
+			margin: 0;
+			background-color: #33ffcc;
+			padding-bottom: 50px;
+		}
+		#main-section {
+			width:640px;
+			/*height:1151px;*/
+			/*background: url(common-bg.png) no-repeat center center;*/
+			position:relative;
+		}
+		#input-phone {
+			width: 454px;
+			height: 173px;
+			background: url(input-phone.png) no-repeat center center;
+			/* position: absolute; */
+			/* left: 93px; */
+			/* top: 60px; */
+			margin: 70px auto 0 auto;
+			position: relative;
+		}
+		.float-btn {
+			position: absolute;
+			cursor: pointer;
+		}
+
+		.cs-input {
+			border: 0px;
+			position: absolute;
+			/*background-color: rgba(255,0,0,0.6);*/
+			font-size: 20px;
+			line-height: 200%;
+		}
+		input#phone {
+			left: 20px;
+			top: 70px;
+			width: 410px;
+		}
+		#get-QR-code {
+			left: 302px;
+			top: 130px;
+			width: 112px;
+			height: 36px;
+			border-radius: 20px;
+			cursor: pointer;
+		}
+		div.QR-code {
+			width: 454px;
+			margin: 40px auto 0 auto;
+			background-color: #FFF;
+			color:#333;
+		}
+		div.QR-code span {
+			text-align: center;
+			line-height: 150%;
+			font-size: 26px;
+			display: block;
+			padding-bottom: 22px;
+			color: #cc76d1;
+		}
+		div.QR-code img {
+			width:454px;
+			height:454px;
+			display:block;
+		}
+		div#lottery {
+			margin: 0 auto;
+			text-align: center;
+			padding-top: 40px;
+			display: none;
+		}
+		div#lottery a {
+			color: #FF0;
+		}
+		#lottery a,
+		#thanks {
+			margin: 0 auto;
+			text-align: center;
+			color: #FFF;
+			font-size: 2em;
+			text-decoration: none;
+		}
+		#thanks {
+			/* position: absolute; */
+			width: 100%;
+			margin-top: 20px;
+			left: 0;
+			display: none;
+		}
+	</style>
+</head>
+<body>
+<div id="main-section">
+	<div id="title">
+		<img src="title.jpg" alt="">
+	</div>
+	<!--输入手机号码区域-->
+	<!--<div id="input-phone">
+		<input type="text" id="phone" class="cs-input" placeholder="请先输入手机号码">
+		<div id="get-QR-code" class="float-btn"></div>
+	</div>-->
+	<!--抽奖区域-->
+	<!--<div id="lottery">
+		<a href="lottery.html" target="_self">点击这里前往抽奖区</a>
+	</div>-->
+	<!--二维码展示区域-->
+	<div id="thanks">感谢您的购买，请您妥善保存好二维码</div>
+</div>
+
+<script>
+    //$.getJSON('http://www.xiaolvyou.com.cn//znhz/front/huodong_queryOrderDetail.action?phone='+$('#phone').val(), function(result){
+    $.getJSON('http://www.xiaolvyou.com.cn/znhz/front/huodong_queryOrderDetail.action?guest_id= '+guestid, function(result){
+        console.log(result);
+        //如果购买产品结果集是空的，则不显示抽奖和二维码
+        if (result.orderList.length>0){
+            //把所有产品循环显示出来
+            result.orderList.map(function(unit){
+				/*
+				 miaoshaname 产品名称
+				 mark 预购车型
+				 fraction 价格
+				 dispatchtype 数量
+				 phone 手机号码
+				 paystatedes 支付状态
+				 miaoshatime 创建时间
+				 checktdate 更新时间
+				 */
+                var ticketType = '';
+                var ticketInfo = '';
+                if (unit.miaoshapro_id=='584') {
+                    ticketType = '单人电子票';
+                    ticketInfo = '10月28日至12月10日';
+                }
+                if (unit.miaoshapro_id=='585') {
+                    ticketType = '双人电子套票';
+                    ticketInfo = '10月28日至12月10日';
+                }
+
+                //把二维码显示出来
+                //$('#main-section').append('<div class="QR-code"><img src="http://www.xiaolvyou.com.cn/znhz/front/qr_codeImage.action?code_url='+unit.address+'" alt=""><span>'+unit.miaoshaname+' '+ticketInfo+'</span></div>');
+				var status = '';
+                if (unit.paystatedes=='已检票')
+                    status = '<label style="color:#F00;">[已检票]</label>';
+				$('#main-section').append('<div class="QR-code"><img src="http://www.xiaolvyou.com.cn/znhz/front/qr_codeImage.action?code_url='+unit.address+'" alt=""><span>'+unit.name+'于'+unit.miaoshatime.substr(0,16)+'<br>购买了6月11日电子票'+unit.dispatchtype+'张'+'</span></div>');
+                $('#thanks').show();
+                console.log(/*名字*/unit.miaoshaname,/*账单ID*/unit.sys_show_order_id, /*对应手机号码*/unit.phone, /*状态*/unit.paystatedes, /*数量*/unit.dispatchtype);
+            });
+            //构造抽奖地址并显示抽奖地址
+			/* 20161211 关闭抽奖页面连接
+			 $('#lottery>a').attr('href','lottery.html?phone='+$('#phone').val());
+			 $('#lottery').show();
+			 */
+        }else{
+            alert('您没有或已用完可供扫描的门票二维码了。');
+        }
+
+    });
+
+
+	var _phone = getParameterValue(window.location.href, 'phone');
+	console.log(_phone);
+	//将手机号码赋值给#phone输入框
+	$('#phone').val(_phone);
+	//如果_phone不为空，则自动点击获取二维码按钮
+	if (_phone!=''){
+		$('#get-QR-code').click();
+	}
+	//http://www.xiaolvyou.com.cn//znhz/front/huodong_queryOrderDetail.action?phone=15874991816
+</script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="443d658e-7535-4272-b61e-518b36d8f7b7" name="124.232.152.222" url="http://www.xiaolvyou.com.cn/znhz/ticket/">
+        <fileTransfer host="124.232.152.222" port="222" rootFolder="/znhz/ticket">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" />
+          </advancedOptions>
+          <option name="port" value="222" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

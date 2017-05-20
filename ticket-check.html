@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>第十二届长沙车展:检查电子票</title>
+	<meta name="viewport" content="width=640, user-scalable=no">
+	<script src="jquery-3.1.1.min.js"></script>
+	<script>
+		//查询url参数函数
+		//有则返回参数列表list
+		//没有则返回空串
+		function getParameters(inUrl/*完整的URL字符串*/) {
+			//url中有?号才继续
+			if (inUrl.indexOf('\?') >= 0) {
+				return inUrl.substring(inUrl.indexOf('?') + 1).split('&');    //有则返回所有参数的list
+			} else {
+				return '';  //没有则返回''
+			}
+		}
+
+		//获得url中某个参数的值
+		//有则返回参数的值
+		//没有则返回空串
+		function getParameterValue(inUrl/*输入Url*/, inName/*参数名*/) {
+			var paraList = getParameters(inUrl);
+			for (var i = 0; i < paraList.length; i++) {
+				//如果没有'='则跳过
+				if (paraList[i].indexOf('=') < 0) {
+					continue;
+				}
+				//如果参数名=inName则返回参数值
+				var tempVal = paraList[i].split('=');
+				if (tempVal[0] == inName) {
+					return tempVal[1];
+				}
+			}
+			return '';
+		}
+	</script>
+	<style>
+		body {
+			padding: 0;
+			margin: 0;
+			background: #33ffcc;
+			padding-bottom: 20px;
+		}
+
+		#main-section {
+			width: 640px;
+			height: 1151px;
+			position: relative;
+			padding-top: 20px;
+		}
+
+		.ticket {
+			width: 455px;
+			height: 150px;
+			margin: 20px auto 20px auto;
+			position: relative;
+			/*background: #FFF;*/
+			background-image: url(e-ticket.png);
+		}
+
+		.ticket > input[type="checkbox"] {
+			position: absolute;
+			right: 0;
+			top: 0;
+			/*
+			width: 3em;
+			height: 3em;
+			*/
+			width: 0;
+			height: 0;
+			overflow: hidden;
+		}
+
+		.ticket-time {
+			position: absolute;
+			right: 22px;
+			bottom: 38px;
+			font-size: 28px;
+			line-height: 150%;
+			text-shadow: 1px 1px 2px #F7C07E;
+			color: #EF8200;
+		}
+		.ticket-price {
+			position: absolute;
+			left: 68px;
+			bottom: 0px;
+			background-color: #00A0E8;
+			color: #FFF;
+			font-size: 1.5em;
+			/* padding: 0 7px; */
+			padding: 0 0.2em;
+		}
+
+		.ticket-number {
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			font-size: 1.5em;
+			/*border: 1px solid #00A0E8;*/
+			background-color: #00A0E8;
+			color: #FFF;
+			padding: 0 0.2em;
+		}
+
+		.status {
+			position: absolute;
+			right: 134px;
+			bottom: 0px;
+			background-color: #00A0E8;
+			color: #FFF;
+			font-size: 1.5em;
+			/* padding: 0 7px; */
+			padding: 0 0.2em;
+		}
+
+		.single-ticket {
+			background: url(ticket-single-c.png) no-repeat center center;
+			background-size: cover;
+		}
+
+		.double-ticket {
+			background: url(ticket-double-c.png) no-repeat center center;
+			background-size: cover;
+		}
+
+		.ticket:last-child {
+			margin-bottom: 70px;
+		}
+
+		div#submit-btn {
+			position: fixed;
+			width: 100%;
+			line-height: 50px;
+			bottom: 0;
+			text-align: center;
+			font-size: 24px;
+			color: #FFF;
+			background-color: #1f6675;
+			border-color: #3e4b55;
+			box-shadow: inset 0 1px 0 #66BFFF;
+			border: 1px solid transparent;
+			border-radius: 2px;
+		}
+
+		div#phone {
+			text-align: center;
+			color: #FFF;
+			font-size: 30px;
+			line-height: 200%;
+		}
+	</style>
+</head>
+<body>
+<div id="title">
+	<img src="title.jpg" alt="">
+</div>
+<!--<div id="phone">
+	用户手机：<span></span>
+</div>-->
+<div id="main-section">
+	<!--
+	单人票
+	<div class="single-ticket ticket">
+		<input type="checkbox" name="" id="1211">
+		<div class="ticket-time">购买于 2016-09-10 12:12:12</div>
+		<div class="ticket-number">3张</div>
+		<div class="status">已付款</div>
+	</div>
+	&lt;!&ndash;双人票&ndash;&gt;
+	<div class="double-ticket ticket">
+		<input type="checkbox" name="" id="1233">
+		<div class="ticket-time">购买于 2016-09-10 12:12:12</div>
+		<div class="ticket-number">3张</div>
+		<div class="status">已付款</div>
+	</div>
+	-->
+</div>
+<div id="submit-btn">
+	提交
+</div>
+
+<script>
+	//检查localStorage中是否保存所需的数据
+	//if (localStorage.getItem('checkerFlag') == 1) {
+	if (true) {
+		var _trade_no = getParameterValue(window.location.href, 'trade_no');
+		//检查是否有phone电话号码参数
+		if (_trade_no == "") {
+			alert('订单号码不正确或没有输入，请检查后重新扫码。');
+		} else {
+			//有参数则调用接口查询数据
+			//请求获取二维码 //15874991816
+			$.getJSON('http://www.xiaolvyou.com.cn/znhz/front/huodong_getOrderDetail.action?trade_no=' + _trade_no, function (result) {
+				console.log(result);
+				//如果购买产品结果集是空的，则不显示抽奖和二维码
+				if (result.orderVO != null) {
+					//把所有产品循环显示出来
+					var unit = result.orderVO;
+
+					//填写#phone
+					$('#phone>span').text(unit.phone);
+
+					console.log(/*类型*/unit.miaoshaname, unit.miaoshapro_id, /*时间*/unit.miaoshatime, /*账单ID*/unit.sys_show_order_id, /*对应手机号码*/unit.phone, /*状态*/unit.paystatedes, /*数量*/unit.dispatchtype);
+					//输出到屏幕上
+					var _type = '';
+					if (unit.miaoshapro_id == '584') _type = 'single-ticket';
+					if (unit.miaoshapro_id == '585') _type = 'double-ticket';
+					$('#main-section').append('	<div class="' + _type + ' ticket"> <input type="checkbox" name="" id="' + unit.sys_show_order_id + '" checked="checked"> <div class="ticket-time">'+unit.name+' 于<br>' + unit.miaoshatime + ' 购买</div><div class="ticket-price">180元/张</div><div class="ticket-number">共' + unit.dispatchtype + '张</div> <div class="status">' + unit.paystatedes + '</div> </div>');
+
+				}else{
+					alert('此二维码无效！');
+				}
+
+			});
+		}
+	} else {
+		alert('您尚未获得验票资格，请联系相关人员。');
+	}
+
+
+	//点击查票按钮，将选择的票据划成已使用状态
+	//改变：曹熙要一次全部提交不用单个选择了
+	$('#submit-btn').click(function () {
+		var _tempList = [];
+		var _idList   = '';
+		$(".ticket>input[type='checkbox']").each(function () {
+			console.log($(this).attr('id') + ":" + $(this).prop('checked'));
+			if ($(this).prop('checked')) {
+
+				_tempList.push($(this).attr('id'));
+			}
+		});
+		_idList = _tempList.join(',');
+		//alert(_idList);
+		//发送给接口
+		console.log('http://www.xiaolvyou.com.cn/znhz/front/huodong_updateOrderPayState.action?trade_no_arr=' + _idList);
+		$.getJSON('http://www.xiaolvyou.com.cn/znhz/front/huodong_updateOrderPayState.action?trade_no_arr=' + _idList, function (result) {
+			console.log(result);
+			alert('已检票' + result.status + '张');
+			window.location.href = window.location.href+'&random='+parseInt(Math.random()*10000);
+		});
+	});
+</script>
+</body>
+</html>
