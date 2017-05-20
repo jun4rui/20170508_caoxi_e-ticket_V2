@@ -208,7 +208,7 @@
 					var _type = '';
 					if (unit.miaoshapro_id == '584') _type = 'single-ticket';
 					if (unit.miaoshapro_id == '585') _type = 'double-ticket';
-					$('#main-section').append('	<div class="' + _type + ' ticket"> <input type="checkbox" name="" id="' + unit.sys_show_order_id + '" checked="checked"> <div class="ticket-time">'+unit.name+' 于<br>' + unit.miaoshatime + ' 购买</div><div class="ticket-price">180元/张</div><div class="ticket-number">共' + unit.dispatchtype + '张</div> <div class="status">' + unit.paystatedes + '</div> </div>');
+					$('#main-section').append('	<div class="' + _type + ' ticket"> <input type="checkbox" name="" id="' + unit.sys_show_order_id + '" checked="checked"> <div class="ticket-time">'+unit.name+'<br>2017年6月11日使用的电子票</div><div class="ticket-price">总价：'+unit.fraction+'元</div><div class="ticket-number">共' + unit.dispatchtype + '张</div> <div class="status">' + unit.paystatedes + '</div> </div>');
 
 				}else{
 					alert('此二维码无效！');
