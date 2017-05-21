@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
 	<meta charset="UTF-8">
-	<title>第十二届长沙车展:检查电子票</title>
+	<title>草莓音乐节:购票</title>
 	<meta name="viewport" content="width=640, user-scalable=no">
 	<script src="jquery-3.1.1.min.js"></script>
 	<script>
@@ -77,11 +77,11 @@
 		.ticket-time {
 			position: absolute;
 			right: 22px;
-			bottom: 38px;
-			font-size: 28px;
-			line-height: 150%;
-			text-shadow: 1px 1px 2px #F7C07E;
-			color: #EF8200;
+			bottom: 13px;
+			font-size: 24px;
+			line-height: 180%;
+			text-shadow: 1px 1px 2px #b7b7b7;
+			color: #2f2f2f;
 		}
 		.ticket-price {
 			position: absolute;
@@ -184,8 +184,8 @@
 
 <script>
 	//检查localStorage中是否保存所需的数据
-	//if (localStorage.getItem('checkerFlag') == 1) {
-	if (true) {
+	if (localStorage.getItem('checkerFlag') == 1) {
+	/*if (true) {*/
 		var _trade_no = getParameterValue(window.location.href, 'trade_no');
 		//检查是否有phone电话号码参数
 		if (_trade_no == "") {
@@ -208,7 +208,8 @@
 					var _type = '';
 					if (unit.miaoshapro_id == '584') _type = 'single-ticket';
 					if (unit.miaoshapro_id == '585') _type = 'double-ticket';
-					$('#main-section').append('	<div class="' + _type + ' ticket"> <input type="checkbox" name="" id="' + unit.sys_show_order_id + '" checked="checked"> <div class="ticket-time">'+unit.name+'<br>2017年6月11日使用的电子票</div><div class="ticket-price">总价：'+unit.fraction+'元</div><div class="ticket-number">共' + unit.dispatchtype + '张</div> <div class="status">' + unit.paystatedes + '</div> </div>');
+					//$('#main-section').append('	<div class="' + _type + ' ticket"> <input type="checkbox" name="" id="' + unit.sys_show_order_id + '" checked="checked"> <div class="ticket-time">'+unit.name+'<br>2017年6月11日使用的电子票</div><div class="ticket-price">总价：'+unit.fraction+'元</div><div class="ticket-number">共' + unit.dispatchtype + '张</div> <div class="status">' + unit.paystatedes + '</div> </div>');
+					$('#main-section').append('	<div class="' + _type + ' ticket"> <input type="checkbox" name="" id="' + unit.sys_show_order_id + '" checked="checked"> <div class="ticket-time">'+unit.name+'：'+unit.phone+'<br>购买时间：'+unit.miaoshatime+'<br>总价：'+unit.fraction+' 已支付 6.11门票共'+unit.dispatchtype+'张</div></div>');
 
 				}else{
 					alert('此二维码无效！');
