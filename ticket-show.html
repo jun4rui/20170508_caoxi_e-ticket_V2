@@ -99,7 +99,7 @@
 		div.QR-code span {
 			text-align: center;
 			line-height: 150%;
-			font-size: 26px;
+			font-size: 14px;
 			display: block;
 			padding-bottom: 22px;
 			color: #cc76d1;
@@ -194,13 +194,13 @@
                 console.log(unit.remark);
                 tempTicketInfo = unit.remark.match('06\-10\~([1-9])');
 				if (tempTicketInfo!=null && unit.remark.match('06\-10\~([1-9])').length==2){
-					console.log('<br>购买了6月10日的电子票'+unit.remark.match('06\-10\~([1-9])')[1]+'张');
-					ticketShow += '<br>购买了6月10日的电子票'+unit.remark.match('06\-10\~([1-9])')[1]+'张';
+					console.log('<br>购买了6月10日的'+unit.miaoshaname+unit.remark.match('06\-10\~([1-9])')[1]+'张');
+					ticketShow += '<br>购买了6月10日的'+unit.miaoshaname+'共'+unit.remark.match('06\-10\~([1-9])')[1]+'张';
 				}
                 tempTicketInfo = unit.remark.match('06\-11\~([1-9])');
                 if (tempTicketInfo!=null && unit.remark.match('06\-11\~([1-9])').length==2){
-                    console.log('<br>购买了6月11日的电子票'+unit.remark.match('06\-11\~([1-9])')[1]+'张');
-                    ticketShow += '<br>购买了6月11日的电子票'+unit.remark.match('06\-11\~([1-9])')[1]+'张';
+                    console.log('<br>购买了6月11日的'+unit.miaoshaname+unit.remark.match('06\-11\~([1-9])')[1]+'张');
+                    ticketShow += '<br>购买了6月11日的'+unit.miaoshaname+'共'+unit.remark.match('06\-11\~([1-9])')[1]+'张';
                 }
 				//$('#main-section').append('<div class="QR-code"><img src="http://www.xiaolvyou.com.cn/znhz/front/qr_codeImage.action?code_url='+unit.address+'" alt=""><span>'+unit.name+'于'+unit.miaoshatime.substr(0,16)+'<br>购买了6月11日电子票'+unit.dispatchtype+'张'+'</span></div>');
                 $('#main-section').append('<div class="QR-code"><img src="http://www.xiaolvyou.com.cn/znhz/front/qr_codeImage.action?code_url='+unit.address+'" alt=""><span>'+unit.name+'于'+unit.miaoshatime.substr(0,16)+ticketShow+'</span></div>');
