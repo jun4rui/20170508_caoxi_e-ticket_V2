@@ -185,9 +185,9 @@
 		<input type="hidden" name="channel" value="">
 		<!--<div class="buy-btn float-btn" fid="ticket-single">购买此票</div>-->
 		<!--减少按钮-->
-		<!--<div class="numBtn single-jia"></div>
+		<div class="numBtn single-jia"></div>
 		<input type="text" id="single-num" name="quantity" class="float-btn" value="0">
-		<div class="numBtn single-jian"></div>-->
+		<div class="numBtn single-jian"></div>
 		<!--增加按钮-->
 		<!--订票2区域-->
 		<input type="hidden" name="miaoshaprp_id" value="585">
@@ -195,10 +195,10 @@
 		<input type="hidden" name="remark" value="">
 		<input type="hidden" name="channel" value="">
 		<!--<div class="buy-btn float-btn" fid="ticket-double">购买此票</div>-->
-		<!--<div class="buy-btn float-btn"></div>
+		<div class="buy-btn float-btn"></div>
 		<div class="numBtn double-jia"></div>
 		<input type="text" id="double-num" name="quantity" class="float-btn" value="0">
-		<div class="numBtn double-jian"></div>-->
+		<div class="numBtn double-jian"></div>
 	</form>
 </div>
 <script>
@@ -344,12 +344,12 @@
 					失败返回： status 101 //用户不存在  status 102 //数量不够  status 1 成功 返回微信支付需要的参数*/
                     var SERVER_ADDR = 'http://www.xiaolvyou.com.cn';
                     var jsonStr = SERVER_ADDR + '/znhz/front/huodong_addHuoDongOrderWeixin.action';
-                    jsonStr += '?miaoshaprp_id=591';
+                    jsonStr += '?miaoshaprp_id=592';
                     jsonStr += '&guest_id='+guestid;
                     jsonStr += '&name='+$('#models').val();
                     jsonStr += '&phone='+$('#phone').val();
-                    jsonStr += '&remark=06-10~0,06-11~'+$('#double-num').val();
-                    jsonStr += '&quantity='+(parseInt($('#double-num').val()));
+                    jsonStr += '&remark=06-10~'+$('#single-num').val()+',06-11~'+$('#double-num').val();
+                    jsonStr += '&quantity='+(parseInt($('#single-num').val())+parseInt($('#double-num').val()));
                     console.log("AJAX 1:"+jsonStr);
                     $.getJSON(jsonStr, function (result) {
                         console.log(result);
