@@ -197,6 +197,7 @@
 					console.log('<br>购买了6月10日的'+unit.miaoshaname+unit.remark.match('06\-10\~([1-9])')[1]+'张');
 					ticketShow += '<br>购买了6月10日的'+unit.miaoshaname+'共'+unit.remark.match('06\-10\~([1-9])')[1]+'张';
 				}
+                //判断是否有6-11日的票
                 tempTicketInfo = unit.remark.match('06\-11\~([1-9])');
                 if (tempTicketInfo!=null && unit.remark.match('06\-11\~([1-9])').length==2){
                     console.log('<br>购买了6月11日的'+unit.miaoshaname+unit.remark.match('06\-11\~([1-9])')[1]+'张');

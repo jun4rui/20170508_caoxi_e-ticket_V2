@@ -60,6 +60,9 @@
 			/*background: #FFF;*/
 			background-image: url(e-ticket.png);
 		}
+		.hl {
+			color:red;
+		}
 
 		.ticket > input[type="checkbox"] {
 			position: absolute;
@@ -76,10 +79,10 @@
 
 		.ticket-time {
 			position: absolute;
-			right: 22px;
-			bottom: 13px;
-			font-size: 24px;
-			line-height: 180%;
+			right: 34px;
+			bottom: 12px;
+			font-size: 22px;
+			line-height: 120%;
 			text-shadow: 1px 1px 2px #b7b7b7;
 			color: #2f2f2f;
 		}
@@ -183,6 +186,9 @@
 </div>
 
 <script>
+    var ticketShow = '';
+    var tempTicketInfo = '';
+
 	//检查localStorage中是否保存所需的数据
 	if (localStorage.getItem('checkerFlag') == 1) {
 	/*if (true) {*/
@@ -200,6 +206,20 @@
 					//把所有产品循环显示出来
 					var unit = result.orderVO;
 
+                    //判断是否有6-10日的票
+                    console.log(unit.remark);
+                    tempTicketInfo = unit.remark.match('06\-10\~([1-9])');
+                    if (tempTicketInfo!=null && unit.remark.match('06\-10\~([1-9])').length==2){
+                        console.log('<br>购买了6月10日的'+unit.miaoshaname+unit.remark.match('06\-10\~([1-9])')[1]+'张');
+                        ticketShow += '<br>购买了<span class="hl">6月10日</span>的'+unit.miaoshaname+'共<span class="hl">'+unit.remark.match('06\-10\~([1-9])')[1]+'</span>张';
+                    }
+                    //判断是否有6-11日的票
+                    tempTicketInfo = unit.remark.match('06\-11\~([1-9])');
+                    if (tempTicketInfo!=null && unit.remark.match('06\-11\~([1-9])').length==2){
+                        console.log('<br>购买了6月11日的'+unit.miaoshaname+unit.remark.match('06\-11\~([1-9])')[1]+'张');
+                        ticketShow += '<br>购买了<span class="hl">6月11日</span>的'+unit.miaoshaname+'共<span class="hl">'+unit.remark.match('06\-11\~([1-9])')[1]+'</span>张';
+                    }
+
 					//填写#phone
 					$('#phone>span').text(unit.phone);
 
@@ -209,7 +229,8 @@
 					if (unit.miaoshapro_id == '584') _type = 'single-ticket';
 					if (unit.miaoshapro_id == '585') _type = 'double-ticket';
 					//$('#main-section').append('	<div class="' + _type + ' ticket"> <input type="checkbox" name="" id="' + unit.sys_show_order_id + '" checked="checked"> <div class="ticket-time">'+unit.name+'<br>2017年6月11日使用的电子票</div><div class="ticket-price">总价：'+unit.fraction+'元</div><div class="ticket-number">共' + unit.dispatchtype + '张</div> <div class="status">' + unit.paystatedes + '</div> </div>');
-					$('#main-section').append('	<div class="' + _type + ' ticket"> <input type="checkbox" name="" id="' + unit.sys_show_order_id + '" checked="checked"> <div class="ticket-time">'+unit.name+'：'+unit.phone+'<br>购买时间：'+unit.miaoshatime+'<br>总价：'+unit.fraction+' 已支付 6.11门票共'+unit.dispatchtype+'张</div></div>');
+					//$('#main-section').append('	<div class="' + _type + ' ticket"> <input type="checkbox" name="" id="' + unit.sys_show_order_id + '" checked="checked"> <div class="ticket-time">'+unit.name+'：'+unit.phone+'<br>购买时间：'+unit.miaoshatime+'<br>总价：'+unit.fraction+' 已支付 6.11门票共'+unit.dispatchtype+'张</div></div>');
+					$('#main-section').append('	<div class="' + _type + ' ticket"> <input type="checkbox" name="" id="' + unit.sys_show_order_id + '" checked="checked"> <div class="ticket-time">'+unit.name+'：<span class="hl">'+unit.phone+'</span><br>购买时间：'+unit.miaoshatime+ticketShow+'<br>总价：<span class="hl">'+unit.fraction+'</span>已支付, 门票共<span class="hl">'+unit.dispatchtype+'</span>张</div></div>');
 
 				}else{
 					alert('此二维码无效！');
