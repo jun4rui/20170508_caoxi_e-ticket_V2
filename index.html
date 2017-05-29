@@ -99,7 +99,7 @@
 	    $('#buylink').remove();
 	}
 	var args = location.href.split("?")[1];
-	$('#buylink').attr('href', 'ticket-buy.html?'+args);
+	$('#buylink').attr('href', 'ticket-buy.html?'+args+'&version='+parseInt(Math.random()*1000000));
 </script>
 </body>
 </html>

@@ -1,98 +1,16 @@
-<!doctype html>
-<html lang="zh_CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="jquery-3.1.1.min.js"></script>
-    <script src="common.js"></script>
-    <title>1H5支付测试</title>
-</head>
-
-<body>
-<script>
-    'use strict';
-
-    //如果userid为空则跳转到微信登录接口重新登录
-    if (getParameterValue(window.location.href, 'userid') == '') {
-        //window.location.href = 'http://www.xiaolvyou.com.cn/znhz/front/weixin_thirdWebPageLogin.action?page_url=test.html!3Flineid!3D0';
-    }
-
-    var SERVER_ADDR = 'http://www.xiaolvyou.com.cn';
-    var jsonStr = SERVER_ADDR + '/znhz/front/huodong_addHuoDongOrderWeixin.action';
-    jsonStr += '?miaoshaprp_id=591';
-    jsonStr += '&guest_id=368020';
-    jsonStr += '&name=曹先生';
-    jsonStr += '&remark=06-10';
-    jsonStr += '&quantity=3';
-    $.getJSON(jsonStr, function (result) {
-        console.log(result);
-        alert(result);
-        /*
-         appId : "wx102e097eda9e4358"
-         nonceStr : "RlQenziZFBpggecf"
-         package : "prepay_id=wx201705112234595d13ff507d0253213931"
-         paySign : "D9CA8F19BD7BC73CCA65913937FCFE0C"
-         signType : "MD5"
-         status : "1"
-         timeStamp : "1494513189"
-         */
-    });
 
 
-    //基本逻辑如下
-    /*
-     先获取微信接口的ready状态，ready以后开始代码处理
-     首先获得接口的必要参数，获得返回参数以后再构建支付请求并提交
-
-     */
-    alert("inside.");
-
-    function doPay() {
-        $.getJSON('http://www.xiaolvyou.com.cn/znhz/front/weixin_getJsConfig.action?jsoncallback=?&page_url=' + window.location.href, function (result) {
-            alert('weixin ready!');
-            alert(
-                'appId:' + result.appId + '\n' +
-                'timestamp:' + result.timestamp + '\n' +
-                'nonceStr:' + result.noncestr + '\n' +
-                'signature:' + result.signature + '\n'
-            );
-
-            //开始构造支付
-            WeixinJSBridge.invoke(
-                'getBrandWCPayRequest', {
-                    "appId": result.appId,                  //公众号名称，由商户传入
-                    "timeStamp": result.timestamp,          //时间戳，自1970年以来的秒数
-                    "nonceStr": result.noncestr,            //随机串
-                    "package": "prepay_id=123456789",
-                    "signType": "MD5",                      //微信签名方式：
-                    "paySign": result.signature             //微信签名
-                },
-                function (res) {
-                    if (res.err_msg == "get_brand_wcpay_request:ok") {
-                    }     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
-                }
-            );
-        });
-    }
+width: 1.5em;
+height: 1.5em;
+padding: 0px;
+margin: 0px;
 
 
-    function tryPay() {
-        //如果WeixinJSBridge准备好了就发起支付流程
-        if (typeof WeixinJSBridge == "undefined") {
-            if (document.addEventListener) {
-                document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-            } else if (document.attachEvent) {
-                document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
-                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
-            }
-        } else {
-            doPay();
-        }
-    }
-</script>
+background-color: rgba(255,0,0,0);
 
-<button onClick="tryPay()">点击支付</button>
-</body>
-</html>
+
+
+
+width: 62px;
+height: 54px;
+
