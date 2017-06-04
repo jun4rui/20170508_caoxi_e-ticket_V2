@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=640, user-scalable=no">
-	<title>草莓音乐节:购票</title>
-	<link rel="stylesheet" href="normalize.css">
-	<script src="jquery-3.1.1.min.js"></script>
-	<script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=640, user-scalable=no">
+    <title>草莓音乐节:购票</title>
+    <link rel="stylesheet" href="normalize.css">
+    <script src="jquery-3.1.1.min.js"></script>
+    <script>
         //查询url参数函数
         //有则返回参数列表list
         //没有则返回空串
@@ -38,185 +38,190 @@
             return '';
         }
         var guestid = getParameterValue(location.href, 'guest_id');
-        if (guestid==''){
+        if (guestid == '') {
             alert('信息异常，请关闭购买页面后重新尝试');
             location.href = 'index.html';
         }
-	</script>
-	<style>
-		body {
-			padding: 0;
-			margin: 0;
-			position: relative;
-		}
+    </script>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            position: relative;
+        }
 
-		#main-section {
-			width: 640px;
-			height: 1138px;
-			background: url(ticket-buy-bg.jpg) no-repeat center center;
-			position: relative;
-		}
+        #main-section {
+            width: 640px;
+            height: 1138px;
+            background: url(ticket-buy-bg.jpg) no-repeat center center;
+            position: relative;
+        }
 
-		.float-btn {
-			position: absolute;
-			cursor: pointer;
-		}
+        .float-btn {
+            position: absolute;
+            cursor: pointer;
+        }
 
-		.buy-btn {
-			left: 204px;
-			top: 1002px;
-			width: 231px;
-			height: 70px;
-			border-radius: 30px;
-			/* background-color: rgba(227, 64, 58, 0.33); */
-			border: 0;
-			/* line-height: 40px; */
-			text-align: center;
-			font-weight: bold;
-			color: #FFF;
-			font-size: 23px;
-			/* box-shadow: 0px 3px 0px #555; */
-		}
+        .buy-btn {
+            left: 204px;
+            top: 1002px;
+            width: 231px;
+            height: 70px;
+            border-radius: 30px;
+            /* background-color: rgba(227, 64, 58, 0.33); */
+            border: 0;
+            /* line-height: 40px; */
+            text-align: center;
+            font-weight: bold;
+            color: #FFF;
+            font-size: 23px;
+            /* box-shadow: 0px 3px 0px #555; */
+        }
 
-		.cs-input {
-			border: 0px;
-			position: absolute;
-			/*background-color: rgba(255,0,0,0.6);*/
-			font-size: 20px;
-			line-height: 200%;
-		}
+        .cs-input {
+            border: 0px;
+            position: absolute;
+            /*background-color: rgba(255,0,0,0.6);*/
+            font-size: 20px;
+            line-height: 200%;
+        }
 
-		input#phone {
-			left: 225px;
-			top: 454px;
-			width: 170px;
-		}
+        input#phone {
+            left: 225px;
+            top: 454px;
+            width: 170px;
+        }
 
-		input#models {
-			left: 225px;
-			top: 377px;
-			width: 250px;
-		}
+        input#models {
+            left: 225px;
+            top: 377px;
+            width: 250px;
+        }
 
-		input#check-code {
-			left: 225px;
-			top: 529px;
-			width: 170px;
-		}
+        input#check-code {
+            left: 225px;
+            top: 529px;
+            width: 170px;
+        }
 
-		div#get-check-code {
-			left: 427px;
-			top: 450px;
-			width: 129px;
-			height: 56px;
-			/* border-radius: 0 54%; */
-			cursor: pointer;
-		}
+        div#get-check-code {
+            left: 427px;
+            top: 450px;
+            width: 129px;
+            height: 56px;
+            /* border-radius: 0 54%; */
+            cursor: pointer;
+        }
 
-		#single-num {
-			left: 408px;
-			top: 628px;
-			font-size: 40px;
-			line-height: 54px;
-			border: 0;
-			color: #000;
-			/* box-shadow: 0px 0px 5px #D2D2D2; */
-			-webkit-appearance: none;
-			text-align: center;
+        #single-num {
+            left: 408px;
+            top: 628px;
+            font-size: 40px;
+            line-height: 54px;
+            border: 0;
+            color: #000;
+            /* box-shadow: 0px 0px 5px #D2D2D2; */
+            -webkit-appearance: none;
+            text-align: center;
 
-			width: 1.5em;
-			height: 1.5em;
-			padding: 0px;
-			margin: 0px;
-		}
-		#double-num {
-			left: 408px;
-			top: 767px;
-			font-size: 40px;
-			width: 1.5em;
-			height: 1.5em;
-			padding: 0px;
-			margin: 0px;
-			line-height: 52px;
-			border: 0;
-			color: #000;
-			-webkit-appearance: none;
-			text-align: center;
-			background-color: rgba(255,0,0,0);
-		}
+            width: 1.5em;
+            height: 1.5em;
+            padding: 0px;
+            margin: 0px;
+        }
 
-		.numBtn {
-			background-color: rgba(255, 0, 0, 0.2);
-			width: 44px;
-			height: 45px;
-			position: absolute;
-			border-radius: 50%;
-		}
-		.single-jia {
-			left:481px;
-			top: 647px;
+        #double-num {
+            left: 408px;
+            top: 767px;
+            font-size: 40px;
+            width: 1.5em;
+            height: 1.5em;
+            padding: 0px;
+            margin: 0px;
+            line-height: 52px;
+            border: 0;
+            color: #000;
+            -webkit-appearance: none;
+            text-align: center;
+            background-color: rgba(255, 0, 0, 0);
+        }
 
-		}
-		.single-jian {
-			left: 353px;
-			top: 647px;
-		}
-		.double-jia {
-			left: 481px;
-			top: 789px;
-		}
-		.double-jian {
+        .numBtn {
+            background-color: rgba(255, 0, 0, 0.2);
+            width: 44px;
+            height: 45px;
+            position: absolute;
+            border-radius: 50%;
+        }
 
-			left: 353px;
-			top: 789px;
-		}
-	</style>
+        .single-jia {
+            left: 481px;
+            top: 647px;
+
+        }
+
+        .single-jian {
+            left: 353px;
+            top: 647px;
+        }
+
+        .double-jia {
+            left: 481px;
+            top: 789px;
+        }
+
+        .double-jian {
+
+            left: 353px;
+            top: 789px;
+        }
+    </style>
 </head>
 <body>
 <div id="main-section">
-	<!--信息输入表单区域-->
-	<input type="text" id="phone" class="cs-input" placeholder="手机">
-	<input type="text" id="models" class="cs-input" placeholder="您的姓名">
-	<input type="text" id="check-code" class="cs-input" placeholder="验证码">
-	<div id="get-check-code" class="float-btn" countdown="0"></div>
+    <!--信息输入表单区域-->
+    <input type="text" id="phone" class="cs-input" placeholder="手机">
+    <input type="text" id="models" class="cs-input" placeholder="您的姓名">
+    <input type="text" id="check-code" class="cs-input" placeholder="验证码">
+    <div id="get-check-code" class="float-btn" countdown="0"></div>
 
-	<!--订票1区域-->
-	<form action="http://www.xiaolvyou.com.cn/znhz/front/huodong_addHuoDongOrder.action" id="ticket-single">
-		<input type="hidden" name="miaoshaprp_id" value="584">
-		<input type="hidden" name="phone" value="">
-		<input type="hidden" name="remark" value="">
-		<input type="hidden" name="channel" value="">
-		<!--<div class="buy-btn float-btn" fid="ticket-single">购买此票</div>-->
-		<!--减少按钮-->
-		<div class="numBtn single-jia"></div>
-		<input type="text" id="single-num" name="quantity" class="float-btn" value="0">
-		<div class="numBtn single-jian"></div>
-		<!--增加按钮-->
-		<!--订票2区域-->
-		<input type="hidden" name="miaoshaprp_id" value="585">
-		<input type="hidden" name="phone" value="">
-		<input type="hidden" name="remark" value="">
-		<input type="hidden" name="channel" value="">
-		<!--<div class="buy-btn float-btn" fid="ticket-double">购买此票</div>-->
-		<div class="buy-btn float-btn"></div>
-		<div class="numBtn double-jia"></div>
-		<input type="text" id="double-num" name="quantity" class="float-btn" value="0">
-		<div class="numBtn double-jian"></div>
-	</form>
+    <!--订票1区域-->
+    <form action="http://www.xiaolvyou.com.cn/znhz/front/huodong_addHuoDongOrder.action" id="ticket-single">
+        <input type="hidden" name="miaoshaprp_id" value="584">
+        <input type="hidden" name="phone" value="">
+        <input type="hidden" name="remark" value="">
+        <input type="hidden" name="channel" value="">
+        <!--<div class="buy-btn float-btn" fid="ticket-single">购买此票</div>-->
+        <!--减少按钮-->
+        <div class="numBtn single-jia"></div>
+        <input type="text" id="single-num" name="quantity" class="float-btn" value="0">
+        <div class="numBtn single-jian"></div>
+        <!--增加按钮-->
+        <!--订票2区域-->
+        <input type="hidden" name="miaoshaprp_id" value="585">
+        <input type="hidden" name="phone" value="">
+        <input type="hidden" name="remark" value="">
+        <input type="hidden" name="channel" value="">
+        <!--<div class="buy-btn float-btn" fid="ticket-double">购买此票</div>-->
+        <div class="buy-btn float-btn"></div>
+        <div class="numBtn double-jia"></div>
+        <input type="text" id="double-num" name="quantity" class="float-btn" value="0">
+        <div class="numBtn double-jian"></div>
+    </form>
 </div>
 <script>
     /**
      * 处理带渠道参数（channel）的入口链接
      */
     var _channel = getParameterValue(window.location.href, 'channel');
-    if (_channel!=''){
+    if (_channel != '') {
         $('input[name=channel]').val(_channel);
     }
 
     //如果在微信中提醒用户用浏览器打开
     var userAgent = navigator.userAgent.toLowerCase();
     //微信
-    if (userAgent.match(/micromessenger/i) != 'micromessenger'){
+    if (userAgent.match(/micromessenger/i) != 'micromessenger') {
         alert('请在微信中使用，非微信环境中无法支付');
     }
 
@@ -267,50 +272,50 @@
     //点击加减按钮的操作
     $('.numBtn').click(function () {
         console.log($(this).attr('class'));
-        var inBtn = $(this).attr('class').replace(/numBtn /g,'');
+        var inBtn = $(this).attr('class').replace(/numBtn /g, '');
         console.log(inBtn);
 
         var targetDom = '';
         var targetVal = 0;
 
-        if (inBtn=='single-jia'){
-            var newVal = parseInt($('#single-num').val())+1;
-            if (newVal<0) newVal = 0;
-            if (newVal>9) newVal = 9;
+        if (inBtn == 'single-jia') {
+            var newVal = parseInt($('#single-num').val()) + 1;
+            if (newVal < 0) newVal = 0;
+            if (newVal > 9) newVal = 9;
             $('#single-num').val(newVal);
-		}
-        if (inBtn=='single-jian'){
-            var newVal = parseInt($('#single-num').val())-1;
-            if (newVal<0) newVal = 0;
-            if (newVal>9) newVal = 9;
+        }
+        if (inBtn == 'single-jian') {
+            var newVal = parseInt($('#single-num').val()) - 1;
+            if (newVal < 0) newVal = 0;
+            if (newVal > 9) newVal = 9;
             $('#single-num').val(newVal);
-		}
-        if (inBtn=='double-jia'){
-            var newVal = parseInt($('#double-num').val())+1;
-            if (newVal<0) newVal = 0;
-            if (newVal>9) newVal = 9;
+        }
+        if (inBtn == 'double-jia') {
+            var newVal = parseInt($('#double-num').val()) + 1;
+            if (newVal < 0) newVal = 0;
+            if (newVal > 9) newVal = 9;
             $('#double-num').val(newVal);
-		}
-        if (inBtn=='double-jian'){
-            var newVal = parseInt($('#double-num').val())-1;
-            if (newVal<0) newVal = 0;
-            if (newVal>9) newVal = 9;
+        }
+        if (inBtn == 'double-jian') {
+            var newVal = parseInt($('#double-num').val()) - 1;
+            if (newVal < 0) newVal = 0;
+            if (newVal > 9) newVal = 9;
             $('#double-num').val(newVal);
-		}
+        }
 
     });
 
     //点击购买按钮的处理
     $('.buy-btn').click(function () {
-    	/*//关闭购买
-    	alert('票已售罄，本次购买结束。');
-    	return true;*/
+        /*//关闭购买
+         alert('票已售罄，本次购买结束。');
+         return true;*/
 
         var errMsg = '';
         //0. 判断用户名是否填写
-		if ($('#models').val().length<2){
-		    errMsg += '姓名没填写或者太短\n';
-		}
+        if ($('#models').val().length < 2) {
+            errMsg += '姓名没填写或者太短\n';
+        }
         //1. 首先判断手机号码是否存在
         if ($('#phone').val().match(/1[0-9]{10}/) != $('#phone').val()) {
             errMsg += '手机号码不存在或者不规范\n';
@@ -320,7 +325,7 @@
             errMsg += '验证码尚未填写\n';
         }
         //3. 检查购买票数是否正确
-        if ( parseInt($('#double-num').val())==0) {
+        if (parseInt($('#double-num').val()) == 0 && parseInt($('#single-num').val()) == 0) {
             errMsg += '票数错误，请重新设置购买数量\n'
         }
 
@@ -334,30 +339,30 @@
                 if (result.status > 0) {
                     //验证码验证通过
                     //构造ajax请求
-					/*http://localhost:8080/znhz/front/huodong_addHuoDongOrderWeixin.action
-					参数： miaoshaprp_id 活动id 固定 591
-					guest_id 用户id
-					name    姓名
-					phone   手机号码
-					remark  购买日期-票数(例子：6.10~2,6.11~2) (ps:主要给管理员验票时查看购买时间跟票数)
-					quantity　总票数
+                    /*http://localhost:8080/znhz/front/huodong_addHuoDongOrderWeixin.action
+                     参数： miaoshaprp_id 活动id 固定 591
+                     guest_id 用户id
+                     name    姓名
+                     phone   手机号码
+                     remark  购买日期-票数(例子：6.10~2,6.11~2) (ps:主要给管理员验票时查看购买时间跟票数)
+                     quantity　总票数
 
-					成功返回：
+                     成功返回：
 
-					失败返回： status 101 //用户不存在  status 102 //数量不够  status 1 成功 返回微信支付需要的参数*/
+                     失败返回： status 101 //用户不存在  status 102 //数量不够  status 1 成功 返回微信支付需要的参数*/
                     var SERVER_ADDR = 'http://www.xiaolvyou.com.cn';
                     var jsonStr = SERVER_ADDR + '/znhz/front/huodong_addHuoDongOrderWeixin.action';
                     jsonStr += '?miaoshaprp_id=592';
-                    jsonStr += '&guest_id='+guestid;
-                    jsonStr += '&name='+$('#models').val();
-                    jsonStr += '&phone='+$('#phone').val();
-                    jsonStr += '&remark=06-10~'+$('#single-num').val()+',06-11~'+$('#double-num').val();
-                    jsonStr += '&quantity='+(parseInt($('#single-num').val())+parseInt($('#double-num').val()));
-                    console.log("AJAX 1:"+jsonStr);
+                    jsonStr += '&guest_id=' + guestid;
+                    jsonStr += '&name=' + $('#models').val();
+                    jsonStr += '&phone=' + $('#phone').val();
+                    jsonStr += '&remark=06-10~' + $('#single-num').val() + ',06-11~' + $('#double-num').val();
+                    jsonStr += '&quantity=' + (parseInt($('#single-num').val()) + parseInt($('#double-num').val()));
+                    console.log("AJAX 1:" + jsonStr);
                     $.getJSON(jsonStr, function (result) {
                         console.log(result);
-						if (result.status=='1'){
-							//构造微信付款请求
+                        if (result.status == '1') {
+                            //构造微信付款请求
                             WeixinJSBridge.invoke(
                                 'getBrandWCPayRequest', {
                                     "appId": result.appId,                  //公众号名称，由商户传入
@@ -370,24 +375,24 @@
                                 function (res) {
                                     if (res.err_msg == "get_brand_wcpay_request:ok") {
                                         //alert('r');
-                                        location.href = 'ticket-show.html?guest_id='+guestid;
+                                        location.href = 'ticket-show.html?guest_id=' + guestid;
                                     }     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
                                 }
                             );
 
-						}else{
-						    //发生错误的处理
-						    var errMsg = '';
-						    if (result.status=='101'){
-						        errMsg = '用户不存在';
-							}
-							if (result.status=='102'){
-						        errMsg = '数量不够';
-							}
-							if (errMsg!=''){
-							    alert('错误：'+errMsg);
-							}
-						}
+                        } else {
+                            //发生错误的处理
+                            var errMsg = '';
+                            if (result.status == '101') {
+                                errMsg = '用户不存在';
+                            }
+                            if (result.status == '102') {
+                                errMsg = '数量不够';
+                            }
+                            if (errMsg != '') {
+                                alert('错误：' + errMsg);
+                            }
+                        }
 
                     });
 
