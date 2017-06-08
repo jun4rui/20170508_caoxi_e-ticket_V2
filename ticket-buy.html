@@ -42,6 +42,9 @@
             alert('信息异常，请关闭购买页面后重新尝试');
             location.href = 'index.html';
         }
+
+        /*定于2017年06月08日下午4点关闭购买*/
+        alert('本产品已停售');
     </script>
     <style>
         body {
@@ -128,6 +131,7 @@
             height: 1.5em;
             padding: 0px;
             margin: 0px;
+            display:none;
         }
 
         #double-num {
@@ -144,6 +148,7 @@
             -webkit-appearance: none;
             text-align: center;
             background-color: rgba(255, 0, 0, 0);
+            display:none;
         }
 
         .numBtn {
@@ -157,23 +162,26 @@
         .single-jia {
             left: 481px;
             top: 647px;
-
+            display:none;
         }
 
         .single-jian {
             left: 353px;
             top: 647px;
+            display:none;
         }
 
         .double-jia {
             left: 481px;
             top: 789px;
+            display:none;
         }
 
         .double-jian {
 
             left: 353px;
             top: 789px;
+            display:none;
         }
     </style>
 </head>
@@ -310,6 +318,9 @@
         /*//关闭购买
          alert('票已售罄，本次购买结束。');
          return true;*/
+        /*定于2017年06月08日下午4点关闭购买*/
+        alert('产品已停售');
+        return true;
 
         var errMsg = '';
         //0. 判断用户名是否填写
